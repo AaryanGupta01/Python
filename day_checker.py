@@ -3,6 +3,13 @@ date = int(input("Enter a Date: "))
 month = input("Enter a month: ").lower()
 year = input("Enter a year: ")
 
+if month == 'april' or 'june' or 'november' or 'september' and date > 30:
+    print("Invalid Date")
+    sys.exit()
+
+if month == 'january' or 'march' or 'may' or 'july' or 'august' or 'october' or 'december' and date > 31:
+    print("Invalid Date")
+    sys.exit()
 
 a = year[2:]
 b = int(a) // 4
