@@ -1,13 +1,11 @@
 import sys
+
 date = int(input("Enter a Date: "))
 month = input("Enter a month: ").lower()
 year = input("Enter a year: ")
 
-if month == 'april' or 'june' or 'november' or 'september' and date > 30:
-    print("Invalid Date")
-    sys.exit()
-
-if month == 'january' or 'march' or 'may' or 'july' or 'august' or 'october' or 'december' and date > 31:
+# Check for invalid date
+if (month in ['april', 'june', 'november', 'september'] and date > 30) or (month in ['january', 'march', 'may', 'july', 'august', 'october', 'december'] and date > 31) or (month == 'february' and ((int(year) % 4 == 0 and date > 29) or (int(year) % 4 != 0 and date > 28))):
     print("Invalid Date")
     sys.exit()
 
@@ -16,7 +14,6 @@ b = int(a) // 4
 c = 0
 
 # YEAR CODE
-
 if 1700 <= int(year) < 1800:
     c = 4
 elif 1800 <= int(year) < 1900:
@@ -59,27 +56,16 @@ elif month == 'november':
 elif month == 'december':
     d = 5
 
-# did you mean should add or not??
-# LEAP YEAR CONDITION ADD TO IT !!!
-
-# adding all variables
+# Adding all variables
 add = int(a) + int(b) + int(c) + int(d) + int(date)
-
 rem = add % 7
-# DAY CODE
-#Leap Year condition
-if date == 29 and month == 'february':
-    if int(year) % 4 ==0:
-        if int(year) % 100==0:
-            if int(year) % 400==0:
-                rem-= 1
-        else:
-            rem-=1
-    else:
-        print("Invalid Date")
-        sys.exit()
-        
 
+# Adjust for leap years if necessary
+if month == 'january' or month == 'february':
+    if int(year) % 4 == 0 and (int(year) % 100 != 0 or int(year) % 400 == 0):
+        rem = (rem - 1) % 7
+
+# DAY CODE
 if rem == 0:
     print("DAY is SUNDAY")
 elif rem == 1:
@@ -94,5 +80,3 @@ elif rem == 5:
     print("DAY is FRIDAY")
 elif rem == 6:
     print("DAY is SATURDAY")
-
-
